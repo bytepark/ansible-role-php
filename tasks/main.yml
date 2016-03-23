@@ -1,2 +1,22 @@
 ---
-# tasks file for .
+#- name: Add ppa Repository
+#  apt_repository: repo=ppa:ondrej/php
+#
+- name: Update apt
+  apt: update_cache=yes
+
+#- name: Install php
+#  apt: pkg=php state=latest
+
+- name: Install php-fpm
+  apt: pkg=php5-fpm state=latest
+
+- name: Install PHP Packages
+  apt: pkg={{ item }} state=latest
+  with_items: '{{php.packages}}'
+  when: php.packages is defined
+
+- include: configure.yml
+- include: php-fpm.yml
+
+#- include: pecl.yml
