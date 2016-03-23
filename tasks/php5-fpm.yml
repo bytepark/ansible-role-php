@@ -7,12 +7,12 @@
 
 - name: Set permissions on socket - mode
   lineinfile: "dest=/etc/php5/fpm/pool.d/www.conf state=present regexp='^;?listen.mode' line='listen.mode = 0660'"
-  notify: restart php5-fpm
+  notify: restart php
 
 - name: ensure timezone is set in fpm php.ini
   lineinfile: dest=/etc/php5/fpm/php.ini
               regexp='date.timezone ='
-              line='date.timezone = {{ server.timezone }}'
+              line='date.timezone = {{ server_timezone }}'
 - name: enabling opcache
   lineinfile: dest=/etc/php5/fpm/php.ini
               regexp=';?opcache.enable=\d'
@@ -20,8 +20,8 @@
 
 - name: Change upload max size
   lineinfile: "dest=/etc/php5/fpm/php.ini state=present regexp='^upload_max_filesize' line='upload_max_filesize = 32M'"
-  notify: restart php5-fpm
+  notify: restart 
 
 - name: Change post max size
   lineinfile: "dest=/etc/php5/fpm/php.ini state=present regexp='^post_max_size' line='post_max_size = 32M'"
-  notify: restart php5-fpm
+  notify: restart php

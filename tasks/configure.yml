@@ -3,16 +3,31 @@
 #  register: modphp
 
 - stat: path=/etc/php5/fpm/php.ini
-  register: phpfpm
+  register: php5fpm
+
+- stat: path=/etc/php/7.0/fpm/php.ini
+  register: php7fpm
 
 - stat: path=/etc/php5/cli/php.ini
-  register: phpcli
+  register: php5cli
 
-- include: php-fpm.yml
-  when: phpfpm.stat.exists
+- stat: path=/etc/php/7.0/cli/php.ini
+  register: php7cli
 
-- include: php-cli.yml
-  when: phpcli.stat.exists
+
+
+
+- include: php5-fpm.yml
+  when: php5fpm.stat.exists
+
+- include: php7-fpm.yml
+  when: php5fpm.stat.exists
+
+- include: php5-cli.yml
+  when: php5cli.stat.exists
+
+- include: php7-cli.yml
+  when: php7cli.stat.exists
 
 #- include: mod-php.yml
 #  when: modphp.stat.exists

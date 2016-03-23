@@ -1,22 +1,22 @@
 ---
-#- name: Add ppa Repository
-#  apt_repository: repo=ppa:ondrej/php
-#
+- name: Add ppa Repository
+  apt_repository: repo=ppa:ondrej/php
+
 - name: Update apt
   apt: update_cache=yes
 
-#- name: Install php
-#  apt: pkg=php state=latest
+- name: Install php
+  apt: pkg={{ php_version }} state=latest
 
 - name: Install php-fpm
-  apt: pkg=php5-fpm state=latest
+  apt: pkg={{ php_version }}-fpm state=latest
 
 - name: Install PHP Packages
   apt: pkg={{ item }} state=latest
-  with_items: '{{php.packages}}'
-  when: php.packages is defined
+  with_items: "{{ php_packages }}"
+  when: php_packages is defined
 
 - include: configure.yml
-- include: php-fpm.yml
+
 
 #- include: pecl.yml
