@@ -1,0 +1,19 @@
+---
+#- stat: path=/etc/php5/apache2/php.ini
+#  register: modphp
+
+- stat: path=/etc/{{ php_path }}/fpm/php.ini
+  register: php_fpm
+
+- stat: path=/etc/{{ php_path }}/cli/php.ini
+  register: php_cli
+
+- include: php-fpm.yml
+  when: php_fpm.stat.exists
+
+- include: php-cli.yml
+  when: php_cli.stat.exists
+
+
+#- include: mod-php.yml
+#  when: modphp.stat.exists
