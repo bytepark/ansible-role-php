@@ -1,3 +1,3 @@
 ---
 - name: restart php
-  service: name={{ php_version }} enabled=yes state=restarted
+  service: name={{ php_version }}-fpm enabled=yes state=restarted

@@ -21,7 +21,7 @@
   when: php5fpm.stat.exists
 
 - include: php7-fpm.yml
-  when: php5fpm.stat.exists
+  when: php7fpm.stat.exists
 
 - include: php5-cli.yml
   when: php5cli.stat.exists
