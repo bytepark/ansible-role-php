@@ -1,6 +1,7 @@
 ---
-# defaults file for .
-php_version: php7.0
+# defaults file for . #php7.0 or php5
+php_version: php5
 server_timezone: UTC
 
-php_packages: []
+#php_packages: []
+php_packages: php-cli
