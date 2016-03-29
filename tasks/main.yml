@@ -5,6 +5,12 @@
 - name: Update apt
   apt: update_cache=yes
 
+# Setting php path
+- set_fact: php_path='php5'
+  when: php_version == 'php5'
+- set_fact: php_path='php/7.0'
+  when: php_version == 'php7.0'
+
 - name: Install php
   apt: pkg={{ php_version }} state=latest
 

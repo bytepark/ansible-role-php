@@ -8,11 +8,8 @@
 - stat: path=/etc/php/7.0/fpm/php.ini
   register: php7fpm
 
-- stat: path=/etc/php5/cli/php.ini
-  register: php5cli
-
-- stat: path=/etc/php/7.0/cli/php.ini
-  register: php7cli
+- stat: path=/etc/{{ php_path}}/cli/php.ini
+  register: php_cli
 
 
 
@@ -23,11 +20,9 @@
 - include: php7-fpm.yml
   when: php7fpm.stat.exists
 
-- include: php5-cli.yml
-  when: php5cli.stat.exists
+- include: php-cli.yml
+  when: php_cli.stat.exists
 
-- include: php7-cli.yml
-  when: php7cli.stat.exists
 
 #- include: mod-php.yml
 #  when: modphp.stat.exists
