@@ -1,4 +1,6 @@
-ansible-role-nginx
+[![Build Status](https://travis-ci.org/bytepark/ansible-role-php.svg?branch=master)](https://travis-ci.org/bytepark/ansible-role-php)
+
+ansible-role-php
 =========
 
 Ansible role to install php
@@ -27,7 +29,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: bytepark.ansible-role-php }
+         - { role: bytepark.php }
       vars:
         php_version: php7.0
 		server_timezone: UTC
