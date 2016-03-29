@@ -1,0 +1,27 @@
+---
+- name: php-fpm | Set permissions on socket - owner
+  lineinfile: "dest=/etc/{{ php_path }}/fpm/pool.d/www.conf state=present regexp='^;?listen.owner' line='listen.owner = www-data'"
+
+- name: php-fpm | Set permissions on socket - group
+  lineinfile: "dest=/etc/{{ php_path }}/fpm/pool.d/www.conf state=present regexp='^;?listen.group' line='listen.group = www-data'"
+
+- name: php-fpm | Set permissions on socket - mode
+  lineinfile: "dest=/etc/{{ php_path }}/fpm/pool.d/www.conf state=present regexp='^;?listen.mode' line='listen.mode = 0660'"
+  notify: restart php-fpm
+
+- name: php-fpm | Ensure timezone is set in fpm php.ini
+  lineinfile: dest=/etc/{{ php_path }}/fpm/php.ini
+              regexp='date.timezone ='
+              line='date.timezone = {{ server_timezone }}'
+- name: php-fpm | enabling opcache
+  lineinfile: dest=/etc/{{ php_path }}/fpm/php.ini
+              regexp=';?opcache.enable=\d'
+              line='opcache.enable=1'
+
+- name: php-fpm | Change upload max size
+  lineinfile: "dest=/etc/{{ php_path }}/fpm/php.ini state=present regexp='^upload_max_filesize' line='upload_max_filesize = 32M'"
+  notify: restart php-fpm 
+
+- name: php-fpm | Change post max size
+  lineinfile: "dest=/etc/{{ php_path }}/fpm/php.ini state=present regexp='^post_max_size' line='post_max_size = 32M'"
+  notify: restart php-fpm
