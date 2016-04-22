@@ -33,7 +33,7 @@ Example Playbook
       vars:
         php_version: php7.0
 		server_timezone: UTC
-		php_packages: php-cli
+		php_packages: [php-cli, php-gd]
 
 License
 -------
