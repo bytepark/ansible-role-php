@@ -8,6 +8,8 @@
 # Setting php path
 - set_fact: php_path='php5'
   when: php_version == 'php5'
+- set_fact: php_path='php5.6'
+  when: php_version == 'php5.6'
 - set_fact: php_path='php/7.0'
   when: php_version == 'php7.0'
 
